@@ -1,7 +1,7 @@
-const Total = (props) => {
+const Total = ({ parts }) => {
 
     let total = 0;
-    for (let part of props.parts) {
+    for (let part of parts) {
         total += part.exercise;
     }
 

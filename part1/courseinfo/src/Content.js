@@ -1,19 +1,19 @@
 import Part from './Part.js';
 
-const Content = (props) => {
+const Content = ({ parts }) => {
     return (
         <>
             <Part
-                name={props.parts[0].name}
-                exercise={props.parts[0].exercise}
+                name={parts[0].name}
+                exercise={parts[0].exercise}
             />
             <Part
-                name={props.parts[1].name}
-                exercise={props.parts[1].exercise}
+                name={parts[1].name}
+                exercise={parts[1].exercise}
             />
             <Part
-                name={props.parts[2].name}
-                exercise={props.parts[2].exercise}
+                name={parts[2].name}
+                exercise={parts[2].exercise}
             />
         </>
     )
