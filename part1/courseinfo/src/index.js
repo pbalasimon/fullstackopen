@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import Header from './Header.js';
 import Content from './Content.js';
 import Total from './Total.js';
+import Buttons from './Buttons.js';
+import ComplexState from './ComplexState.js';
 
 const App = () => {
   const part1 = { name: 'Fundamentals of React', exercise: 10 };
@@ -19,6 +21,8 @@ const App = () => {
       <Header course={course.name} />
       <Content parts={course.parts} />
       <Total parts={course.parts} />
+      <Buttons />
+      <ComplexState />
     </div>
   )
 }
