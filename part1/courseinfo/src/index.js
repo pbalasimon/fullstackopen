@@ -5,6 +5,7 @@ import Content from './Content.js';
 import Total from './Total.js';
 import Buttons from './Buttons.js';
 import ComplexState from './ComplexState.js';
+import Hello from './Hello.js';
 
 const App = () => {
   const part1 = { name: 'Fundamentals of React', exercise: 10 };
@@ -16,8 +17,13 @@ const App = () => {
       part1, part2, part3
     ]
   }
+
+  const name = "Pedro";
+  const age = 36;
+
   return (
     <div>
+      <Hello name={name} age={age} />
       <Header course={course.name} />
       <Content parts={course.parts} />
       <Total parts={course.parts} />
