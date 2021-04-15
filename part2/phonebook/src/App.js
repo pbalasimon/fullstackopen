@@ -4,9 +4,13 @@ const DEFAULT_PERSON = { name: '', number: '' };
 
 const App = () => {
     const [persons, setPersons] = useState([
-        { name: 'Arto Hellas', number: '000' }
+        { name: 'Arto Hellas', number: '000' },
+        { name: 'John Doe', number: '111' },
+        { name: 'Walter White', number: '222' },
+        { name: 'Yoda', number: '333' }
     ]);
     const [person, setPerson] = useState(DEFAULT_PERSON);
+    const [filter, setFilter] = useState('');
 
     const handleSubtmit = (event) => {
         event.preventDefault();
@@ -25,9 +29,22 @@ const App = () => {
         setPerson({ ...person, [event.target.name]: event.target.value });
     }
 
+    const handleFilter = (event) => {
+        const filter = event.target.value;
+        setFilter(filter);
+        const personsFiltered = persons.filter(person => {
+            return person.name.toLowerCase().includes(filter.toLowerCase())
+        });
+        setPersons(personsFiltered);
+    }
+
     return (
         <div>
             <h2>Phonebook</h2>
+            <div>
+                Filter shown with: <input type="text" name="filter" onChange={handleFilter} value={filter} />
+            </div>
+            <h2>Add New Phone</h2>
             <form onSubmit={handleSubtmit}>
                 <div>
                     Name: <input type="text" name="name" onChange={handleChange} value={person.name} />
