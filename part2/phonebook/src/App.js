@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 
 const DEFAULT_PERSON = { name: '', number: '' };
+const DEFAULT_PERSONS = [
+    { name: 'Arto Hellas', number: '000' },
+    { name: 'John Doe', number: '111' },
+    { name: 'Walter White', number: '222' },
+    { name: 'Yoda He', number: '333' }
+];
 
 const App = () => {
-    const [persons, setPersons] = useState([
-        { name: 'Arto Hellas', number: '000' },
-        { name: 'John Doe', number: '111' },
-        { name: 'Walter White', number: '222' },
-        { name: 'Yoda', number: '333' }
-    ]);
+    const [persons, setPersons] = useState(DEFAULT_PERSONS);
+    const [personsShowed, setPersonsShowed] = useState([...persons]);
     const [person, setPerson] = useState(DEFAULT_PERSON);
     const [filter, setFilter] = useState('');
 
@@ -35,7 +37,7 @@ const App = () => {
         const personsFiltered = persons.filter(person => {
             return person.name.toLowerCase().includes(filter.toLowerCase())
         });
-        setPersons(personsFiltered);
+        setPersonsShowed(personsFiltered);
     }
 
     return (
@@ -57,7 +59,7 @@ const App = () => {
                 </div>
             </form>
             <h2>Numbers</h2>
-            {persons.map(person => {
+            {personsShowed.map(person => {
                 return (<div key={person.name}> {person.name + ': ' + person.number}</div>)
             })}
         </div>
