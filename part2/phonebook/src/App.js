@@ -8,6 +8,11 @@ const App = () => {
 
     const handleSubtmit = (event) => {
         event.preventDefault();
+        const personExists = persons.some(person => person.name === newName.trim());
+        if (personExists) {
+            alert(`${newName} is alreary added to phonebook`);
+            return;
+        }
         setPersons([...persons, { name: newName }]);
         setNewName('');
     }
