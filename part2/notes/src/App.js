@@ -1,6 +1,7 @@
 import React from 'react'
 import Note from './Note.js';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -9,8 +10,8 @@ const App = () => {
 
   useEffect(() => {
     const getNotes = async () => {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-      const notes = await response.json();
+      const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      const notes = response.data;
       console.log(notes);
       setNotes(notes);
       setLoading(false);
