@@ -1,10 +1,23 @@
 import React from 'react'
 import Note from './Note.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const App = (props) => {
-  const [notes, setNotes] = useState(props.notes);
+const App = () => {
+  const [loading, setLoading] = useState(false);
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
+
+  useEffect(() => {
+    const getNotes = async () => {
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+      const notes = await response.json();
+      console.log(notes);
+      setNotes(notes);
+      setLoading(false);
+    }
+    setLoading(true);
+    setTimeout(() => getNotes(), 3000);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,10 +40,11 @@ const App = (props) => {
   return (
     <div>
       <h1>Notes</h1>
+      { (loading) ? 'Cargando' : ''}
       <ul>
         {notes.map((note) => {
           return (
-            <Note key={note.id} id={note.id} content={note.content} date={note.date} />
+            <Note key={note.id} id={note.id} {...note} />
           );
         })}
       </ul>

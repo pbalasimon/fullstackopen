@@ -1,11 +1,9 @@
 import React from 'react'
 
-const Note = ({ id, content, date }) => {
+const Note = ({ id, title }) => {
     return (
         <li>
-            <strong>{id}</strong>
-            <p>{content}</p>
-            <small><time>{date}</time></small>
+            <strong>{id}: </strong> {title}
         </li>
     )
 }
