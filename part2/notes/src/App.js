@@ -2,6 +2,7 @@ import React from 'react'
 import Note from './Note.js';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getNotes, addNote } from './services/notes/notes';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -9,29 +10,32 @@ const App = () => {
   const [newNote, setNewNote] = useState("");
 
   useEffect(() => {
-    const getNotes = async () => {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      const notes = response.data;
-      console.log(notes);
+    setLoading(true);
+    setTimeout(async () => {
+      const notes = await getNotes();
       setNotes(notes);
       setLoading(false);
-    }
-    setLoading(true);
-    setTimeout(() => getNotes(), 3000);
+    }, 3000);
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(newNote);
     const noteToAdd = {
-      id: notes.length + 1,
-      content: newNote,
-      date: new Date().toISOString(),
-      important: Math.random() < 0.5
+      userId: 1,
+      title: newNote,
+      body: newNote,
     }
-    console.log(noteToAdd);
-    setNotes([...notes, noteToAdd]);
-    setNewNote("");
+    try {
+      const note = await addNote(noteToAdd);
+      console.log(note);
+      if (note) {
+        setNotes([...notes, note]);
+        setNewNote("");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleChange = (event) => {
